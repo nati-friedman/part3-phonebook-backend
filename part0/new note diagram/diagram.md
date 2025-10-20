@@ -3,10 +3,11 @@ sequenceDiagram
     participant browser
     participant server
 
+    Note right of browser: Form data sent to the server as the body of the request
+
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    Note right of browser: form data sent to the server as the body of the request
     activate server
-    Note right of browser: the server creates a new note object and adds it to the notes array
+    Note right of browser: The server creates a new note object and adds it to the notes array
     server-->>browser: HTTP status code 302 Found (URL redirect)
     deactivate server
 
