@@ -1,5 +1,6 @@
 ```mermaid
 sequenceDiagram
+    title When the user visits the notes app webpage (SPA)
     participant browser
     participant server
 
