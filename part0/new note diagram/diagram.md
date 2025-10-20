@@ -7,7 +7,7 @@ sequenceDiagram
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
     activate server
-    Note right of browser: The server creates a new note object and adds it to the notes array
+    Note left of server: The server creates a new note object and adds it to the notes array
     server-->>browser: HTTP status code 302 Found (URL redirect)
     deactivate server
 
