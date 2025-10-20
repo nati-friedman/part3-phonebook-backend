@@ -3,15 +3,7 @@ sequenceDiagram
     participant browser
     participant server
 
-    Note right of browser: Form data sent to the server as the body of the request
-
-    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    activate server
-    Note left of server: The server creates a new note object and adds it to the notes array
-    server-->>browser: HTTP status code 302 Found (URL redirect)
-    deactivate server
-
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa
     activate server
     server-->>browser: HTML document
     deactivate server
@@ -21,7 +13,7 @@ sequenceDiagram
     server-->>browser: the CSS file
     deactivate server
 
-    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/spa.js
     activate server
     server-->>browser: the JS file
     deactivate server
@@ -30,9 +22,8 @@ sequenceDiagram
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{"content": "1", "date": "2025-10-19T14:34:43.796Z"}, ...]
+    server-->>browser: [{"content": "", "date": "2025-10-19T14:43:54.105Z"}, ...]
     deactivate server
 
     Note right of browser: The browser executes the callback function that renders the notes
 ```
-
