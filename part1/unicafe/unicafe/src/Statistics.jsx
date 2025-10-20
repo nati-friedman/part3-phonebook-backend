@@ -15,17 +15,21 @@ const Statistics = ({ good, neutral, bad }) => {
 
   // calculate average and positive percentage
   let avg = (1 * good - 1 * bad) / total;
-  let positive = (good / total) * 100 + ' %';
+  let positive = (good / total) * 100 + " %";
 
   return (
     <>
       <h1>Statistics</h1>
-      <StatisticLine text="Good" value={good} />
-      <StatisticLine text="Neutral" value={neutral} />
-      <StatisticLine text="Bad" value={bad} />
-      <StatisticLine text="Total" value={total} />
-      <StatisticLine text="Average" value={avg} />
-      <StatisticLine text="Positive" value={positive} />
+      <table>
+        <tbody>
+          <StatisticLine text="Good" value={good} />
+          <StatisticLine text="Neutral" value={neutral} />
+          <StatisticLine text="Bad" value={bad} />
+          <StatisticLine text="Total" value={total} />
+          <StatisticLine text="Average" value={avg} />
+          <StatisticLine text="Positive" value={positive} />
+        </tbody>
+      </table>
     </>
   );
 };
