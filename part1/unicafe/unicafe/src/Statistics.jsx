@@ -1,6 +1,17 @@
 const Statistics = ({ good, neutral, bad }) => {
-  // calculate total, average and positive percentage
   let total = good + neutral + bad;
+
+  // no submissions made
+  if (!total) {
+    return (
+      <>
+        <h1>Statistics</h1>
+        <p>No feedback given</p>
+      </>
+    );
+  }
+
+  // calculate average and positive percentage
   let avg = (1 * good - 1 * bad) / total;
   let positive = (good / total) * 100;
 
@@ -11,9 +22,8 @@ const Statistics = ({ good, neutral, bad }) => {
       <p>Neutral: {neutral}</p>
       <p>Bad: {bad}</p>
       <p>Total: {total}</p>
-      {/* show only if the numbers are valid */}
-      <p>Average: {avg ? avg : 0}</p>
-      <p>Positive: {positive ? positive : 0} %</p>
+      <p>Average: {avg}</p>
+      <p>Positive: {positive} %</p>
     </>
   );
 };
