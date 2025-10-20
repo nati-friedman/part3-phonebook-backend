@@ -1,4 +1,4 @@
-const Stats = ({ good, neutral, bad }) => {
+const Statistics = ({ good, neutral, bad }) => {
   // calculate total, average and positive percentage
   let total = good + neutral + bad;
   let avg = (1 * good - 1 * bad) / total;
@@ -18,4 +18,4 @@ const Stats = ({ good, neutral, bad }) => {
   );
 };
 
-export default Stats;
+export default Statistics;
