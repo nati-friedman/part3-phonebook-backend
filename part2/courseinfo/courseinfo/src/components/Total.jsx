@@ -1,6 +1,6 @@
 const Total = ({ parts }) => {
   const total = parts.reduce(
-    (accumuator, currentValue) => accumuator + currentValue.exercises,
+    (accumuator, currentPart) => accumuator + currentPart.exercises,
     0
   );
 
