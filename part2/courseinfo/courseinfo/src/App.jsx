@@ -1,3 +1,4 @@
+// A seperate curriculum component was created to render the entire page
 import Curriculum from "./components/Curriculum";
 
 const App = () => {
