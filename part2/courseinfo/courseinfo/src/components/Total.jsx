@@ -4,7 +4,7 @@ const Total = ({ parts }) => {
     0
   );
 
-  return <p>Total of {total} exercises</p>;
+  return <p style={{ fontWeight: "bold" }}>Total of {total} exercises</p>;
 };
 
 export default Total;
