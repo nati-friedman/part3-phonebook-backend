@@ -4,7 +4,7 @@ const Persons = ({ filter, persons }) => {
   // filter the array of persons according to
   // the filter value (case-insensitive)
   const filteredPersons = persons.filter((person) =>
-    person.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
+    person.name.toLowerCase().includes(filter.toLowerCase())
   );
 
   return filteredPersons.map((person) => (

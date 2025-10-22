@@ -11,11 +11,9 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/persons")
-      .then((response) => {
-        setPersons(response.data);
-      });
+    axios.get("http://localhost:3001/persons").then((response) => {
+      setPersons(response.data);
+    });
   }, []);
 
   const handleNameChange = (e) => {
@@ -37,12 +35,18 @@ const App = () => {
       alert(`${newName} is already added to phonebook`);
     } else {
       // add new name to phonebook
-      setPersons(
-        persons.concat({
-          name: newName,
-          number: newNumber,
-        })
-      );
+      const newPerson = {
+        name: newName,
+        number: newNumber,
+      }
+
+      axios
+        .post("http://localhost:3001/persons", newPerson)
+        .then((response) => {
+          setPersons(persons.concat(response.data));
+          setNewName("");
+          setNewNumber("");
+        });
     }
   };
 
