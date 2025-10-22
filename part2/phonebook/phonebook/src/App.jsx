@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Filter from "./components/Filter";
+import AddForm from "./components/AddForm";
+import Persons from "./components/Persons";
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -11,16 +14,16 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("");
   const [filter, setFilter] = useState("");
 
-  const handleFilterChange = (e) => {
-    setFilter(e.target.value);
-  };
-
   const handleNameChange = (e) => {
     setNewName(e.target.value);
   };
 
   const handleNumberChange = (e) => {
     setNewNumber(e.target.value);
+  };
+
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -39,38 +42,22 @@ const App = () => {
     }
   };
 
-  // return filtered array of persons according to
-  // the filter value (case-insensitive)
-  const filterPersons = () => {
-    return persons.filter((person) =>
-      person.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase())
-    );
-  };
-
   return (
     <div>
-      <h1>Phonebook</h1>
-      <div>
-        Filter shown with <input value={filter} onChange={handleFilterChange} />
-      </div>
-      <form onSubmit={handleSubmit}>
-        <h2>Add a new</h2>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {filterPersons().map((person) => (
-        <p key={person.name}>
-          {person.name} {person.number}
-        </p>
-      ))}
+      <h2>Phonebook</h2>
+      <Filter value={filter} handleChange={handleFilterChange} />
+
+      <h3>Add a new</h3>
+      <AddForm
+        name={newName}
+        number={newNumber}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+        handleSubmit={handleSubmit}
+      />
+
+      <h3>Numbers</h3>
+      <Persons filter={filter} persons={persons} />
     </div>
   );
 };
