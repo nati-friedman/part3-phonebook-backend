@@ -10,12 +10,17 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // add new name to phonebook
-    setPersons(
-      persons.concat({
-        name: newName,
-      })
-    );
+    // check if the name already exists in the phonebook
+    if (persons.find(({ name }) => name === newName)) {
+      alert(`${newName} is already added to phonebook`);
+    } else {
+      // add new name to phonebook
+      setPersons(
+        persons.concat({
+          name: newName,
+        })
+      );
+    }
   };
 
   return (
@@ -30,7 +35,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      {persons.map(person => (
+      {persons.map((person) => (
         <p key={person.name}>{person.name}</p>
       ))}
     </div>
