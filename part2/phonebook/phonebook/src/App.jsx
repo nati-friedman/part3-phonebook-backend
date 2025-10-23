@@ -11,11 +11,9 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    personService
-      .getAll()
-      .then((initialValues) => {
-        setPersons(initialValues);
-      });
+    personService.getAll().then((initialValues) => {
+      setPersons(initialValues);
+    });
   }, []);
 
   const handleNameChange = (e) => {
@@ -42,13 +40,22 @@ const App = () => {
         number: newNumber,
       };
 
+      personService.create(newPerson).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName("");
+        setNewNumber("");
+      });
+    }
+  };
+
+  // delete a person form the persons array and db
+  const deletePerson = (person) => {
+    if (window.confirm(`Delete ${person.name}?`)) {
       personService
-        .create(newPerson)
-        .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson));
-          setNewName("");
-          setNewNumber("");
-        })
+        .deleteObject(person.id)
+        .then(() => {
+          setPersons(persons.filter((object) => object.id !== person.id));
+        });
     }
   };
 
@@ -67,7 +74,10 @@ const App = () => {
       />
 
       <h3>Numbers</h3>
-      <Persons filter={filter} persons={persons} />
+      <Persons
+        filter={filter}
+        persons={persons}
+        deletePerson={deletePerson} />
     </div>
   );
 };
