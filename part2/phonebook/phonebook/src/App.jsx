@@ -11,9 +11,11 @@ const App = () => {
   const [filter, setFilter] = useState("");
 
   useEffect(() => {
-    personService.getAll().then((initialValues) => {
-      setPersons(initialValues);
-    });
+    personService
+      .getAll()
+      .then((initialValues) => {
+        setPersons(initialValues);
+      });
   }, []);
 
   const handleNameChange = (e) => {
@@ -30,21 +32,33 @@ const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // check if the name already exists in the phonebook
-    if (persons.find(({ name }) => name === newName)) {
-      alert(`${newName} is already added to phonebook`);
-    } else {
-      // add new name to phonebook
-      const newPerson = {
+    const newPerson = {
         name: newName,
         number: newNumber,
       };
+    // check if the name already exists in the phonebook
+    const exists = persons.find(({ name }) => name === newName)
 
-      personService.create(newPerson).then((returnedPerson) => {
-        setPersons(persons.concat(returnedPerson));
-        setNewName("");
-        setNewNumber("");
-      });
+    if (exists) {
+      // update phone number
+      if (window.confirm(`${newName} is already added to phonebook, replace the old number with the new one?`)) {
+          personService
+            .update(exists.id, newPerson)
+            .then((returnedPerson) => {
+              setPersons(persons.map(person => {
+                return person.id === returnedPerson.id ? returnedPerson : person
+              }))
+            })
+      }
+    } else {
+      // add new person to phonebook
+      personService
+        .create(newPerson)
+        .then((returnedPerson) => {
+          setPersons(persons.concat(returnedPerson));
+          setNewName("");
+          setNewNumber("");
+        });
     }
   };
 
