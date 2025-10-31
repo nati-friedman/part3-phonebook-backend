@@ -35,9 +35,10 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newPerson = {
-        name: newName,
-        number: newNumber,
-      };
+      name: newName,
+      number: newNumber,
+    };
+
     // check if the name already exists in the phonebook
     const exists = persons.find(({ name }) => name === newName)
 
